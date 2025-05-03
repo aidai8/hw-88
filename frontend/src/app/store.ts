@@ -4,7 +4,8 @@ import storage from 'redux-persist/lib/storage'
 import {FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore, } from "redux-persist";
 import {AxiosHeaders, InternalAxiosRequestConfig} from "axios";
 import axiosAPI from "../axiosApi.ts";
-
+import {postsReducer} from "../features/posts/postsSlice.ts";
+import {commentsReducer} from "../features/comments/commentsSlice.ts";
 
 const usersPersistConfig = {
     key: 'store:users',
@@ -14,6 +15,8 @@ const usersPersistConfig = {
 
 const rootReducer = combineReducers({
     users:  persistReducer(usersPersistConfig, usersReducer),
+    posts: postsReducer,
+    comments: commentsReducer,
 });
 
 export const store = configureStore({
